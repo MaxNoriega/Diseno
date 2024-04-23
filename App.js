@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
+import MenuScreen from './Screens/MenuScreen';
+import ProyectosListScreen from './Screens/Proyecto/ProyectosLista';
+import InventarioListScreen from './Screens/Inventario/InventarioList';
+import ClientesListScreen from './Screens/Clientes/ClienteList';
+import ProyectoScreen from './Screens/Proyecto/Proyecto';
+
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Menu">
+        <Stack.Screen name="Menu" component={MenuScreen} 
+        options={{headerShown:false}}/>
+        <Stack.Screen name="ProyectosList" component={ProyectosListScreen} 
+        options={{headerShown:false}}/>
+        <Stack.Screen name="InventarioList" component={InventarioListScreen} 
+        options={{headerShown:false}}/>
+        <Stack.Screen name="ClientesList" component={ClientesListScreen} 
+        options={{headerShown:false}}/>
+        <Stack.Screen name="Proyecto" component={ProyectoScreen} 
+        options={{headerShown:false}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+
+
+
+
+
