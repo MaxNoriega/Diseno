@@ -2,13 +2,66 @@ import React, { useState } from 'react';
 import {StyleSheet, Text, View, TextInput, ScrollView, Image,TouchableOpacity, Modal} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
-export default function Material ({ modalVisible, setModalVisible, }){
+export default function Material ({ modalVisible, setModalVisible, materiales, setMateriales }){
  
   const [nomM,setNomM]= useState('')
   const [cantM,setCantM]= useState('')
   const [cristal,setCristal]= useState('')
   const [color,setColor]= useState('')
-  const [mdo,setMDO]= useState('')
+  const [precio,setPrecio]=useState('')
+
+  const handleNext = () => {
+    if ([nomM, cantM, cristal, color, precio].includes('')) {
+      Alert.alert(
+        'Error',
+        'Todos los campos son obligatorios',
+      )
+      return
+    }
+    const newMateriales = {
+      id: Date.now(),
+      nomM,
+      cantM,
+      cristal,
+      color,
+      precio,
+    }
+    console.log([...materiales, newMateriales])
+    setMateriales([...materiales, newMateriales]);
+    
+    setNomM('')
+    setCantM('')
+    setCristal('')
+    setColor('')
+    setPrecio('')
+  }
+
+  const handleSave = () => {
+    if ([nomM, cantM, cristal, color, precio].includes('')) {
+      Alert.alert(
+        'Error',
+        'Todos los campos son obligatorios',
+      )
+      return
+    }
+    const newMateriales = {
+      id: Date.now(),
+      nomM,
+      cantM,
+      cristal,
+      color,
+      precio,
+    }
+    console.log([...materiales, newMateriales])
+    setMateriales([...materiales, newMateriales]);
+    setModalVisible(!modalVisible)
+    
+    setNomM('')
+    setCantM('')
+    setCristal('')
+    setColor('')
+    setPrecio('')
+  }
 
 
   return (
@@ -24,7 +77,7 @@ export default function Material ({ modalVisible, setModalVisible, }){
         <Image source={require('../../icons/regresar.png')} style={styles.btncancelarIcon}/>
       </TouchableOpacity>
       <Text style={styles.titulo}> Material </Text>
-      <TouchableOpacity style={styles.btnGuardar} onPress={() => setModalVisible(false)}>
+      <TouchableOpacity style={styles.btnGuardar} onPress={handleSave}>
         <Text style={styles.btnGuardarTexto}>Guardar</Text>
       </TouchableOpacity>
     </View>
@@ -99,13 +152,13 @@ export default function Material ({ modalVisible, setModalVisible, }){
            placeholder='Precio del Material'
            placeholderTextColor={'#000000'}
            keyboardType='number-pad'
-           value={mdo}
-           onChangeText={setMDO}
+           value={precio}
+           onChangeText={setPrecio}
         />
       </View>
 
        <View style={{alignItems:'flex-end', marginTop:150}}>
-      <TouchableOpacity onPress={() => setModalVisible(false)}>
+      <TouchableOpacity onPress={handleNext}>
         <Image source={require('../../icons/add.png')} style={styles.addButtonIcon}/>
       </TouchableOpacity>
     </View>

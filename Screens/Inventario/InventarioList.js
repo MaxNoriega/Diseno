@@ -4,11 +4,19 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Image } 
 import { useNavigation } from '@react-navigation/native';
 
 import Material from './Material';
+import ComponentMaterial from './ComponentInventario';
 
 export default function InventarioListScreen() {
     const navigation = useNavigation();
+    const [materiales, setMateriales] = useState([])
+    const [material, setMaterial] = useState({})
 
     const [modalVisible, setModalVisible] = useState(false)
+
+    const EditarMaterial = id => {
+      const EditarMaterial = materiales.filter(material => material.id === id)
+      setMaterial(EditarMaterial[0])
+    }
 
   //Cambiar Ruta de iconos
   //Logica de Buscar Material, Filtros y Agregar Material
@@ -26,17 +34,30 @@ export default function InventarioListScreen() {
           <Image source={require('../../icons/filtro.png')} style={styles.filtroIcon} />
         </TouchableOpacity>
       </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, backgroundColor: '#C6CCDC', marginTop: 20, height: 300 }}>
+      <FlatList style={styles.listado}
+            data={materiales}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => {
+              return (
+                <ComponentMaterial
+            item={item}
+            setModalVisible={setModalVisible}
+            EditarMaterial={EditarMaterial}
+            />
+              )
+            }}
 
-      <View style={styles.clientList}>
-        {/* Aquí irá la lista de clientes */}
-        <Text style={styles.clientItem}>Nombre                                 Cantidad</Text>
-        {/* Puedes agregar más elementos de lista según sea necesario */}
-      </View>
+          />
+
+          </View>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
           <Image source={require('../../icons/add.png')} style={styles.addButtonIcon} />
         </TouchableOpacity>
         <Material
+          materiales={materiales}
+          setMateriales={setMateriales}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}/>
       </View>
@@ -129,4 +150,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
+  listado:{
+    marginTop:50,
+    marginHorizontal:30,
+  
+    },
 });

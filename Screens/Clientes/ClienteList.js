@@ -1,30 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Cliente from './Cliente';
+import ComponentCliente from './ComponentCliente';
 
 export default function ClientesListScreen() {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    const [modalVisible, setModalVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [clientes, setClientes] = useState([])
+  const [cliente, setCliente] = useState({})
 
-  const clientes = [
-    { id: 1, nombre: 'Cliente 1' },
-    { id: 2, nombre: 'Cliente 2' },
-    { id: 3, nombre: 'Cliente 3' },
-    { id: 4, nombre: 'Cliente 4' },
-    { id: 5, nombre: 'Cliente 5' },
-    { id: 6, nombre: 'Cliente 6' },
-    { id: 7, nombre: 'Cliente 7' },
-    // Agrega más clientes según sea necesario
-  ];
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Text>{item.nombre}</Text>
-    </View>
-  );
+  const EditarCliente = id => {
+    const EditarCliente = clientes.filter(cliente => cliente.id === id)
+    setCliente(EditarCliente[0])
+  }
   //Cambiar Ruta de iconos
   //Logica de Buscar Cliente, Filtros y Agregar Clientes
   return (
@@ -43,17 +35,32 @@ export default function ClientesListScreen() {
       </View>
 
       <View style={styles.clientList}>
-        {/* Aquí irá la lista de clientes */}
-        <Text style={styles.clientItem}>Nombre</Text>
-        {/* Puedes agregar más elementos de lista según sea necesario */}
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, backgroundColor: '#C6CCDC', marginTop: 20, height: 300 }}>
+          <FlatList style={styles.listado}
+            data={clientes}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => {
+              return (
+                <ComponentCliente
+                  item={item}
+                  setModalVisible={setModalVisible}
+                  EditarCliente={EditarCliente}
+                />
+              )
+            }}
+
+          />
+        </View>
       </View>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
           <Image source={require('../../icons/add.png')} style={styles.addButtonIcon} />
         </TouchableOpacity>
         <Cliente
+          clientes={clientes}
+          setClientes={setClientes}
           modalVisible={modalVisible}
-          setModalVisible={setModalVisible}/>
+          setModalVisible={setModalVisible} />
       </View>
       <StatusBar style='auto' />
     </View>

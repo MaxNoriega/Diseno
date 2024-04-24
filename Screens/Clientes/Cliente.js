@@ -2,13 +2,63 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, Image, TouchableOpacity, Modal } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
-export default function Cliente({ modalVisible, setModalVisible, }) {
+export default function Cliente({ modalVisible, setModalVisible, clientes, setClientes }) {
 
   const [nomC, setNomC] = useState('')
   const [apellC, setApellC] = useState('')
   const [telC, setTelC] = useState('')
   const [direC, setDireC] = useState('')
   const [cEX, setCEX] = useState('')
+
+  const handleNext = () => {
+    if ([nomC, apellC, telC, direC].includes('')) {
+      Alert.alert(
+        'Error',
+        'Todos los campos son obligatorios',
+      )
+      return
+    }
+    const newClientes = {
+      id: Date.now(),
+      nomC,
+      apellC,
+      telC,
+      direC,
+    }
+    console.log([...clientes, newClientes])
+    setClientes([...clientes, newClientes]);
+    
+    setNomC('')
+    setApellC('')
+    setTelC('')
+    setDireC('')
+  }
+
+  const handleSave = () => {
+    if ([nomC, apellC, telC, direC].includes('')) {
+      Alert.alert(
+        'Error',
+        'Todos los campos son obligatorios',
+      )
+      return
+    }
+    const newClientes = {
+      id: Date.now(),
+      nomC,
+      apellC,
+      telC,
+      direC,
+    }
+    console.log([...clientes, newClientes])
+    setClientes([...clientes, newClientes]);
+    setModalVisible(!modalVisible)
+
+    setNomC('')
+    setApellC('')
+    setTelC('')
+    setDireC('')
+  }
+
 
 
   return (
@@ -24,7 +74,7 @@ export default function Cliente({ modalVisible, setModalVisible, }) {
               <Image source={require('../../icons/regresar.png')} style={styles.btncancelarIcon} />
             </TouchableOpacity>
             <Text style={styles.titulo}> Cliente </Text>
-            <TouchableOpacity style={styles.btnGuardar} onPress={() => setModalVisible(false)}>
+            <TouchableOpacity style={styles.btnGuardar} onPress={handleSave}>
               <Text style={styles.btnGuardarTexto}>Guardar</Text>
             </TouchableOpacity>
           </View>
@@ -102,7 +152,7 @@ export default function Cliente({ modalVisible, setModalVisible, }) {
               </View>
             </View>
 
-            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.addButton}>
+            <TouchableOpacity onPress={handleNext} style={styles.addButton}>
               <Image source={require('../../icons/add.png')} style={styles.addButtonIcon} />
             </TouchableOpacity>
           </View>
