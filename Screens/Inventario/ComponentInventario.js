@@ -1,75 +1,120 @@
-import React from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import React, {useState} from 'react'
+import { Text, View, StyleSheet, TouchableOpacity, Modal } from 'react-native'
 
 export default function ComponentMaterial ({item, setModalVisible, EditarMaterial}) {
-    const { nomM, id} = item
-  return (
-    <View >
-        <Text>{nomM}</Text>
+    const { nomM,cantM, tipo, color, precio,  id} = item
+    const [mostrarMenu, setMostrarMenu] = useState(false);
 
-        <View style={styles.contenedorBotones}>
-            <TouchableOpacity style={[styles.btn, styles.btnEditar]}
-                              onLongPress={()=> {
-                                setModalVisible(true)
-                                EditarMaterial(id)
-                              }}
-            >
-                <Text style={styles.btnTexto}>Editar</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={[styles.btn, styles.btnEliminar]}>
-                <Text style={styles.btnTexto}>Eliminar</Text>
-            </TouchableOpacity>
+    const handleOpcionesPress = () => {
+      setMostrarMenu(true);
+    };
+  
+    const handleEditarPress = () => {
+      // Acción para editar
+      setMostrarMenu(false);
+    };
+  
+    const handleEliminarPress = () => {
+      // Acción para eliminar
+      setMostrarMenu(false);
+    };
+  
+    return (
+      <View style={styles.contenedor}>
+  
+        <View>
+          <Text style={styles.texto}>Nombre:   {nomM} </Text>
+          <Text style={styles.texto}>Cantidad: {cantM} </Text>
+          <Text style={styles.texto}>Precio:      {precio}</Text>
         </View>
-    </View>
-        
-  )
-}
-
-const styles = StyleSheet.create({
-  contenedor:{
-    backgroundColor:'#FFF',
-    padding:20,
-    borderBottomColor:'#94A3B8',
-    borderBottomWidth:1
-  },
-  label:{
-    color:'#374151',
-    textTransform:'uppercase',
-    fontWeight:'700',
-    marginBottom:10
-  },
-  texto:{
-    color:'#6D28D9',
-    fontSize:24,
-    fontWeight:'700'
-  },
-  fecha:{
-    color:'#374151'
-  },
-  contenedorBotones:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginTop:20
-  },
-  btn:{
-    paddingVertical:5,
-    paddingHorizontal:20,
-    borderRadius:5
-  },
-  btnEditar:{
-     backgroundColor:'#F59E0B'
-  },
-  btnEliminar:{
-    backgroundColor:'#EF4444'
-  },
-  btnTexto:{
-    textTransform:'uppercase',
-    fontWeight:'700',
-    fontSize:12,
-    color:'#FFF'
+  
+        <View>
+          <Text style={styles.texto}>Tipo:     {tipo}</Text>
+          <Text></Text>
+          <Text style={styles.texto}>Color:    {color}</Text>
+          
+        </View>
+  
+        <View style={styles.contenedorBotones}>
+          <TouchableOpacity onPress={handleOpcionesPress} style={styles.opcionesButton}>
+          </TouchableOpacity>
+  
+          <Modal visible={mostrarMenu} transparent={true} animationType="fade">
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <TouchableOpacity onPress={handleEditarPress} style={styles.menuItem}>
+                  <Text>Editar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleEliminarPress} style={styles.menuItem}>
+                  <Text>Eliminar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setMostrarMenu(false)} style={styles.menuItemCancelar}>
+                  <Text>Cancelar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+        </View>
+      </View>
+  
+    )
   }
-
-
-
-})
+  
+  const styles = StyleSheet.create({
+    contenedor: {
+      backgroundColor: '#FFF',
+      padding: 10,
+      borderBottomColor: '#94A3B8',
+      borderBottomWidth: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    },
+    label: {
+      color: '#374151',
+      textTransform: 'uppercase',
+      fontWeight: '700',
+      marginBottom: 10
+    },
+    texto: {
+      color: '#000000',
+      fontSize: 18,
+      fontWeight: '500',
+      marginTop: 10
+    },
+    contenedorBotones: {
+      marginTop: 15,
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+    },
+    opcionesButton: {
+      width: 40,
+      height: 75,
+      padding: 1,
+      backgroundColor: '#DDDDDD',
+      borderRadius: 5,
+    },
+    modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+      backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    },
+    modalContent: {
+      backgroundColor: '#FFFFFF',
+      padding: 20,
+      borderRadius: 10,
+      elevation: 10,
+    },
+    menuItem: {
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: '#CCCCCC',
+    },
+    menuItemCancelar: {
+      padding: 10,
+      marginTop: 10,
+    },
+  
+  
+  
+  })

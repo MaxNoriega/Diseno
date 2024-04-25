@@ -34,7 +34,7 @@ export default function InventarioListScreen() {
           <Image source={require('../../icons/filtro.png')} style={styles.filtroIcon} />
         </TouchableOpacity>
       </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, backgroundColor: '#C6CCDC', marginTop: 20, height: 300 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, backgroundColor: '#C6CCDC', marginTop: 20, height: 550 }}>
       <FlatList style={styles.listado}
             data={materiales}
             keyExtractor={(item) => item.id}
@@ -150,9 +150,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
-  listado:{
-    marginTop:50,
-    marginHorizontal:30,
-  
-    },
 });

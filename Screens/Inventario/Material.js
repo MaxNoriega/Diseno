@@ -6,12 +6,12 @@ export default function Material ({ modalVisible, setModalVisible, materiales, s
  
   const [nomM,setNomM]= useState('')
   const [cantM,setCantM]= useState('')
-  const [cristal,setCristal]= useState('')
+  const [tipo,setTipo]= useState('')
   const [color,setColor]= useState('')
   const [precio,setPrecio]=useState('')
 
   const handleNext = () => {
-    if ([nomM, cantM, cristal, color, precio].includes('')) {
+    if ([nomM, cantM, tipo, color, precio].includes('')) {
       Alert.alert(
         'Error',
         'Todos los campos son obligatorios',
@@ -22,7 +22,7 @@ export default function Material ({ modalVisible, setModalVisible, materiales, s
       id: Date.now(),
       nomM,
       cantM,
-      cristal,
+      tipo,
       color,
       precio,
     }
@@ -31,13 +31,13 @@ export default function Material ({ modalVisible, setModalVisible, materiales, s
     
     setNomM('')
     setCantM('')
-    setCristal('')
+    setTipo('')
     setColor('')
     setPrecio('')
   }
 
   const handleSave = () => {
-    if ([nomM, cantM, cristal, color, precio].includes('')) {
+    if ([nomM, cantM, tipo, color, precio].includes('')) {
       Alert.alert(
         'Error',
         'Todos los campos son obligatorios',
@@ -48,7 +48,7 @@ export default function Material ({ modalVisible, setModalVisible, materiales, s
       id: Date.now(),
       nomM,
       cantM,
-      cristal,
+      tipo,
       color,
       precio,
     }
@@ -58,7 +58,7 @@ export default function Material ({ modalVisible, setModalVisible, materiales, s
     
     setNomM('')
     setCantM('')
-    setCristal('')
+    setTipo('')
     setColor('')
     setPrecio('')
   }
@@ -115,15 +115,15 @@ export default function Material ({ modalVisible, setModalVisible, materiales, s
         <Text style={styles.label}>Tipo:           </Text>
         <View style={styles.pickerContainerCristal}>
         <Picker
-        selectedValue={cristal}
+        selectedValue={tipo}
         style={styles.pickerMaterial} 
         onValueChange={(itemValue, itemIndex) =>
-          setCristal(itemValue)
+          setTipo(itemValue)
         }>
-        <Picker.Item label="Concreto" value="concreto" />
-        <Picker.Item label="Madera" value="madera" />
-        <Picker.Item label="Acero" value="acero" />
-        <Picker.Item label="Ladrillo" value="ladrillo" />
+        <Picker.Item label="Ninguno" value="Niguno" />
+        <Picker.Item label="Madera" value="Madera" />
+        <Picker.Item label="Acero" value="Acero" />
+        <Picker.Item label="Ladrillo" value="Ladrillo" />
       </Picker>
       </View>
         </View>
@@ -137,10 +137,10 @@ export default function Material ({ modalVisible, setModalVisible, materiales, s
         onValueChange={(itemValue, itemIndex) =>
           setColor(itemValue)
         }>
-        <Picker.Item label="Concreto" value="concreto" />
-        <Picker.Item label="Madera" value="madera" />
-        <Picker.Item label="Acero" value="acero" />
-        <Picker.Item label="Ladrillo" value="ladrillo" />
+        <Picker.Item label="Ninguno" value="Ninguno" />
+        <Picker.Item label="Madera" value="Madera" />
+        <Picker.Item label="Acero" value="Acero" />
+        <Picker.Item label="Ladrillo" value="Ladrillo" />
       </Picker>
       </View>
         </View>

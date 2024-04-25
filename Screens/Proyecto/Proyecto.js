@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Image, Modal, ScrollView } from 'react-native';
+import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Image, Modal, ScrollView, VirtualizedList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Product from './Producto';
@@ -22,65 +22,65 @@ export default function ProyectoScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate('ProyectosList')}>
           <Image source={require('../../icons/regresar.png')} style={styles.backButtonIcon} />
         </TouchableOpacity>
         <Text style={styles.title}>Proyecto</Text>
-        <TouchableOpacity style={{ backgroundColor: '#303D65', marginTop: 10, marginLeft: 50, width: 100, height: 45 }}>
-          <Text style={{ color: '#FFF', textAlign: 'center', padding: 10, fontSize: 18, borderWidth: 1 }}>Guardar</Text>
+        <TouchableOpacity style={styles.btnSave}>
+          <Text style={styles.txtBtnSave}>Guardar</Text>
         </TouchableOpacity>
       </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
-        <Text style={{ color: '#FFF', marginRight: 10, fontSize: 18, }}>Identificador:</Text>
-        <TextInput style={{ flex: 1, backgroundColor: '#FFFF' }} />
+      <View style={styles.containerID}>
+        <Text style={styles.txtID}>Identificador:</Text>
+        <TextInput style={styles.inputID} />
       </View>
-      <Text style={{ marginTop: 10, marginBottom: 10, color: '#FFFF', fontSize: 20 }}>Notas:</Text>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, backgroundColor: '#FFFF' }}>
-        <TextInput style={{ flex: 1, height: 150 }} multiline={true} />
+      <Text style={styles.txtNotas}>Notas:</Text>
+      <View style={styles.containerNotas}>
+        <TextInput style={styles.inptutNotas} multiline={true} />
       </View>
-      <Text style={{ marginTop: 20, textAlign: 'center', fontSize: 20, color: '#FFFF' }}>PRODUCTOS:</Text>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, backgroundColor: '#C6CCDC', marginTop: 20, height: 300 }}>
-      <FlatList style={styles.listado}
-            data={productos}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => {
-              return (
-                <ComponentProduct
-            item={item}
-            setModalVisible={setModalVisible}
-            productoEditar={productoEditar}
+      <Text style={styles.txtProductos}>PRODUCTOS:</Text>
+      
+      <View style={styles.containerListado}>
+
+        <VirtualizedList style={styles.listado}
+          data={productos}
+          getItemCount={() => productos.length}
+          getItem={(data, index) => data[index]}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <ComponentProduct
+              item={item}
+              setModalVisible={setModalVisible}
+              productoEditar={productoEditar}
             />
-              )
-            }}
-
-          />
+          )}
+        />
       </View>
 
-      <View style={{ justifyContent: 'space-between' }}>
-        <Text style={{ color: '#FFF', fontSize: 20, marginLeft: 10, marginTop: 10 }}>Costo Total:</Text>
+      <View style={styles.ContainerCostoTotal}>
+        <Text style={styles.txtCostoTotal}>Costo Total:</Text>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 10 }}>
-          <View style={{ backgroundColor: '#C6CCDC', height: 40, width: 200, marginTop: 5, marginRight: 100 }} />
+        <View style={styles.ContainerADDbutton}>
+          <View style={styles.ContainerADDicon} />
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <Image source={require('../../icons/add.png')} style={styles.addButtonIcon} />
           </TouchableOpacity>
 
 
-           
+
 
           <Product
-                  productos={productos}
-                  setProductos={setProductos}
-                  modalVisible={modalVisible}
-                  setModalVisible={setModalVisible} />
+            productos={productos}
+            setProductos={setProductos}
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible} />
 
 
 
 
         </View>
       </View>
-
     </View>
   );
 };
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
-    marginTop: 30,
   },
   backButton: {
     marginRight: 20,
@@ -121,11 +120,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 5,
   },
-  addButton: {
-    paddingVertical: 1,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
   addButtonIcon: {
     width: 90,
     height: 90,
@@ -135,16 +129,100 @@ const styles = StyleSheet.create({
     height: 40,
     marginRight: 1,
   },
-  NoPacientes:{
-    marginTop:40,
-    textAlign:'center',
-    fontSize:24,
-    fontWeight:'700'
-  },
 
-  listado:{
-  marginTop:50,
-  marginHorizontal:30,
+  btnSave: {
+    backgroundColor: '#303D65', 
+    marginTop: 10, 
+    marginLeft: 50, 
+    width: 100, 
+    height: 45
 
   },
+  txtBtnSave: {
+    color: '#FFF', 
+    textAlign: 'center', 
+    padding: 10, 
+    fontSize: 18, 
+    borderWidth: 1
+  },
+  listado: {
+    marginTop: 1,
+    marginHorizontal: 1,
+
+  },
+  containerID: {
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    marginTop: 20
+  },
+  txtID: {
+    color: '#FFF', 
+    marginRight: 10, 
+    fontSize: 18
+
+  },
+  inputID: {
+    flex: 1, 
+    backgroundColor: '#FFFF'
+
+  },
+  txtNotas: {
+    marginTop: 10, 
+    marginBottom: 10, 
+    color: '#FFFF', 
+    fontSize: 20
+
+  },
+  containerNotas: {
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    padding: 10, 
+    backgroundColor: '#FFFF'
+
+  },
+  inptutNotas: {
+     flex: 1, 
+      height: 50
+
+  },
+  txtProductos: {
+    marginTop: 20, 
+    textAlign: 'center', 
+    fontSize: 20, 
+    color: '#FFFF' 
+
+  },
+  containerListado: {
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    padding: 10, 
+    backgroundColor: '#C6CCDC', 
+    marginTop: 20, 
+    height: 300
+
+  },
+  ContainerCostoTotal: {
+    justifyContent: 'space-between'
+
+  },
+  txtCostoTotal:{
+    color: '#FFF', 
+    fontSize: 20, 
+    marginLeft: 10, 
+    marginTop: 10
+  },
+  ContainerADDbutton:{
+    flexDirection: 'row', 
+    justifyContent: 'flex-end', 
+    marginBottom: 10
+  },
+  ContainerADDicon:{
+    flexDirection: 'row', 
+    marginBottom: 10, 
+    backgroundColor: '#C6CCDC', 
+    height: 40, 
+    width: 200, 
+    marginTop: 5, 
+    marginRight: 100
+  }
 });
