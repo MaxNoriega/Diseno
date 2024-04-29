@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Image, VirtualizedList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Material from './Material';

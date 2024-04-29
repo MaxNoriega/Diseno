@@ -25,8 +25,11 @@ export default function ProyectosListScreen() {
       </View>
 
       <View style={styles.clientList}>
-        {/* Aquí irá la lista de clientes */}
-        <Text style={styles.clientItem}>Nombre                                 Estado</Text>
+        <View style={{justifyContent:"space-between", flexDirection:"row", marginHorizontal:30}}>
+        <Text style={styles.clientItem}>Nombre</Text>
+        <Text style={styles.clientItem}>Estado</Text>
+        </View>
+                {/* Aquí irá la lista de clientes */}
         {/* Puedes agregar más elementos de lista según sea necesario */}
       </View>
       <View style={styles.footer}>
@@ -91,13 +94,13 @@ const styles = StyleSheet.create({
   clientList: {
     backgroundColor: '#C6CCDC',
     flex: 1,
+    height:600
   },
   clientItem: {
     fontSize: 22,
     marginTop: 5,
     marginBottom: 20,
     color: '#FFFF',
-    marginLeft: 40
   },
   footer: {
     flexDirection: 'row',

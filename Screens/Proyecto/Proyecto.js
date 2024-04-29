@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Image, Modal, ScrollView, VirtualizedList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import Product from './Producto';
 import ComponentProduct from './ComponentProducto';
@@ -13,6 +15,24 @@ export default function ProyectoScreen() {
   const [modalVisible, setModalVisible] = useState(false)
   const [productos, setProductos] = useState([])
   const [producto, setProducto] = useState({})
+  const [costoTotal, setCostoTotal] = useState(0);
+
+  // Calcular el costo total de todos los productos
+  useEffect(() => {
+    calcularCostoTotal();
+  }, [productos]);
+
+  const calcularCostoTotal = () => {
+    let total = 0;
+    productos.forEach(producto => {
+      const costoTotal = parseFloat(producto.costoTotal); // Suponiendo que cada producto tiene una propiedad 'costo'
+      if (!isNaN(costoTotal)) {
+        total += costoTotal;
+      }
+    });
+    setCostoTotal(total);
+  };
+
 
   const productoEditar = id => {
     const productoEditar = productos.filter(producto => producto.id === id)
@@ -62,22 +82,19 @@ export default function ProyectoScreen() {
         <Text style={styles.txtCostoTotal}>Costo Total:</Text>
 
         <View style={styles.ContainerADDbutton}>
-          <View style={styles.ContainerADDicon} />
+          <View style={styles.ContainerCostTOT}>
+            <Text style={styles.costoTotalTXT}>${costoTotal}</Text>
+          </View>
+          
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <Image source={require('../../icons/add.png')} style={styles.addButtonIcon} />
           </TouchableOpacity>
-
-
-
 
           <Product
             productos={productos}
             setProductos={setProductos}
             modalVisible={modalVisible}
             setModalVisible={setModalVisible} />
-
-
-
 
         </View>
       </View>
@@ -89,7 +106,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#42558D',
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
     paddingTop: 60,
   },
   header: {
@@ -112,17 +129,9 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginLeft: 50
   },
-  input: {
-    flex: 1,
-    height: 40,
-    borderWidth: 1,
-    backgroundColor: '#E2E3E8',
-    borderRadius: 5,
-    paddingHorizontal: 5,
-  },
   addButtonIcon: {
-    width: 90,
-    height: 90,
+    width: 120,
+    height: 120,
   },
   backButtonIcon: {
     width: 40,
@@ -182,8 +191,8 @@ const styles = StyleSheet.create({
   },
   inptutNotas: {
      flex: 1, 
-      height: 50
-
+      height: 50,
+    fontSize:18
   },
   txtProductos: {
     marginTop: 20, 
@@ -211,17 +220,23 @@ const styles = StyleSheet.create({
     marginLeft: 10, 
     marginTop: 10
   },
+  costoTotalTXT:{
+    marginTop:5,
+    marginLeft:30,
+    fontSize:26,
+    fontWeight:'600',
+},
   ContainerADDbutton:{
     flexDirection: 'row', 
     justifyContent: 'flex-end', 
     marginBottom: 10
   },
-  ContainerADDicon:{
+  ContainerCostTOT:{
     flexDirection: 'row', 
-    marginBottom: 10, 
+    marginBottom: 10,
     backgroundColor: '#C6CCDC', 
     height: 40, 
-    width: 200, 
+    width: 150, 
     marginTop: 5, 
     marginRight: 100
   }

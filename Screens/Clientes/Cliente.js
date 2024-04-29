@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, Image, TouchableOpacity, Modal } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Cliente({ modalVisible, setModalVisible, clientes, setClientes }) {
 

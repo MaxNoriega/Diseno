@@ -1,23 +1,62 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, Image, TouchableOpacity, Modal, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Product({ modalVisible, setModalVisible, productos, setProductos }) {
+    const [ancho, setAncho] = useState('');
+    const [alto, setAlto] = useState('');
+    const [cristal, setCristal] = useState('');
+    const [color, setColor] = useState('');
+    const [mdo, setMDO] = useState('');
+    const [costoTotal, setCostoTotal] = useState(0);
 
-    const [ancho, setAncho] = useState('')
-    const [alto, setAlto] = useState('')
-    const [cristal, setCristal] = useState('')
-    const [color, setColor] = useState('')
-    const [mdo, setMDO] = useState('')
+    const calcularCostoTotal = () => {
+        // Convertir las cadenas de ancho y alto a valores numéricos
+        const anchoNum = parseFloat(ancho.replace(',', '.'));
+        const altoNum = parseFloat(alto.replace(',', '.'));
+
+        // Paso 1: Calcular el contorno de la ventana
+        const contorno = (anchoNum + altoNum) * 2;
+
+        // Paso 2: Calcular el costo del marco de la ventana
+        const costoMarco = contorno * 100; // Precio del metro de aluminio
+
+        // Paso 3: Calcular el área del cristal
+        const areaCristal = anchoNum * altoNum;
+
+        // Paso 4: Calcular el costo del cristal
+        const costoCristal = areaCristal * parseInt(cristal); // Precio del cristal por metro cuadrado
+
+        // Paso 5: Calcular el costo total sin tener en cuenta el MDO
+        const costoTotalSinMDO = costoMarco + costoCristal;
+
+        // Paso 6: Calcular el porcentaje de MDO como un valor decimal
+        const mdoDecimal = parseFloat(mdo) / 100;
+
+        // Paso 7: Calcular el costo de la mano de obra
+        const costoMDO = costoTotalSinMDO * mdoDecimal;
+
+        // Paso 8: Calcular el costo total sumando el costo del marco, el costo del cristal y el costo de la mano de obra
+        const costoTotalConMDO = costoTotalSinMDO + costoMDO;
+
+        // Paso 9: Actualizar el estado con el costo total incluyendo el MDO
+        setCostoTotal(costoTotalConMDO);
+    };
+
+    useEffect(() => {
+        calcularCostoTotal();
+    }, [ancho, alto, cristal,mdo]);
 
     const handleNext = () => {
         if ([ancho, alto, cristal, color, mdo].includes('')) {
           Alert.alert(
             'Error',
             'Todos los campos son obligatorios',
-          )
-          return
+          );
+          return;
         }
         const newProductos = {
           id: Date.now(),
@@ -26,24 +65,25 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
           cristal,
           color,
           mdo,
-        }
+          costoTotal: costoTotal.toString(), // Convertir a cadena para que se muestre correctamente en el Text
+        };
         console.log([...productos, newProductos])
         setProductos([...productos, newProductos]);
         
-        setAncho('')
-        setAlto('')
-        setCristal('')
-        setColor('')
-        setMDO('')
-      }
+        setAncho('');
+        setAlto('');
+        setCristal('');
+        setColor('');
+        setMDO('');
+    };
 
-      const handleSave = () => {
+    const handleSave = () => {
         if ([ancho, alto, cristal, color, mdo].includes('')) {
           Alert.alert(
             'Error',
             'Todos los campos son obligatorios',
-          )
-          return
+          );
+          return;
         }
         const newProductos = {
           id: Date.now(),
@@ -52,17 +92,18 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
           cristal,
           color,
           mdo,
-        }
+          costoTotal: costoTotal.toString(), // Convertir a cadena para que se muestre correctamente en el Text
+        };
         console.log([...productos, newProductos])
         setProductos([...productos, newProductos]);
-        setModalVisible(!modalVisible)
+        setModalVisible(!modalVisible);
 
-        setAncho('')
-        setAlto('')
-        setCristal('')
-        setColor('')
-        setMDO('')
-      }
+        setAncho('');
+        setAlto('');
+        setCristal('');
+        setColor('');
+        setMDO('');
+    };
 
 
     return (
@@ -123,10 +164,10 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
                                 onValueChange={(itemValue, itemIndex) =>
                                     setCristal(itemValue)
                                 }>
-                                <Picker.Item label="Concreto" value="concreto" />
-                                <Picker.Item label="Madera" value="madera" />
-                                <Picker.Item label="Acero" value="acero" />
-                                <Picker.Item label="Ladrillo" value="ladrillo" />
+                                <Picker.Item label="Concreto" value="100" />
+                                <Picker.Item label="Madera" value="100" />
+                                <Picker.Item label="Acero" value="100" />
+                                <Picker.Item label="Ladrillo" value="100" />
                             </Picker>
                         </View>
                     </View>
@@ -161,7 +202,9 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
                     </View>
                     <View style={styles.campoFin}>
                         <Text style={styles.labelfin}>Costo total</Text>
-                        <Text style={styles.costoTotal}></Text>
+                        <View style={styles.costoTotal}>
+                                <Text style={styles.costoTotalTXT}>${isNaN(costoTotal) ? 0 : costoTotal}</Text>
+                        </View>
                     </View>
 
 
@@ -288,6 +331,12 @@ const styles = StyleSheet.create({
         borderColor: '#000000'
 
     },
+    costoTotalTXT:{
+        textAlign:'center',
+        marginTop:5,
+        fontSize:26,
+        fontWeight:'600',
+    },
     pickerMaterial: {
         width: 250,
         backgroundColor: '#FFF',
@@ -306,9 +355,10 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     addButtonIcon: {
-        width: 90,
-        height: 90,
+        width: 120,
+        height: 120,
         marginRight: 20,
+        marginBottom:20
     },
 
 

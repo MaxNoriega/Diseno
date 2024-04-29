@@ -12,6 +12,7 @@ export default function ClientesListScreen() {
   const [modalVisible, setModalVisible] = useState(false)
   const [clientes, setClientes] = useState([])
   const [cliente, setCliente] = useState({})
+  
 
   const EditarCliente = id => {
     const EditarCliente = clientes.filter(cliente => cliente.id === id)
