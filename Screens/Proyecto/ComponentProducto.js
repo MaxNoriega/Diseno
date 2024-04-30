@@ -25,17 +25,18 @@ export default function ComponentProduct({ item, setModalVisible, productoEditar
 
       <View>
         <Text style={styles.texto}>Ancho: {ancho} m</Text>
-        <Text style={styles.texto}>Alto: {alto} m</Text>
-      </View>
-
-      <View>
-        <Text style={styles.texto}>Cristal: {cristal}</Text>
+        <Text style={styles.texto}>Alto:     {alto} m</Text>
         <Text style={styles.texto}>Color: {color}</Text>
+        <Text style={styles.texto}>Cristal: {cristal}</Text>
+        
+
+        
+        
       </View>
 
       <View style={styles.contenedorBotones}>
         <TouchableOpacity onPress={handleOpcionesPress} style={styles.opcionesButton}>
-          <Text> ...</Text>
+          <Text style={styles.opcionesButtonTxT}>...</Text>
         </TouchableOpacity>
 
         <Modal visible={mostrarMenu} transparent={true} animationType="fade">
@@ -62,7 +63,7 @@ export default function ComponentProduct({ item, setModalVisible, productoEditar
 const styles = StyleSheet.create({
   contenedor: {
     backgroundColor: '#FFF',
-    padding: 20,
+    padding: 10,
     borderBottomColor: '#94A3B8',
     borderBottomWidth: 1,
     flexDirection: 'row',
@@ -81,16 +82,21 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   contenedorBotones: {
-    marginTop: 20,
+    marginTop: 35,
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
   opcionesButton: {
-    width: 25,
-    height: 25,
+    width: 40,
+    height: 40,
     padding: 1,
     backgroundColor: '#DDDDDD',
     borderRadius: 5,
+  },
+  opcionesButtonTxT:{
+    textAlign:'center',
+    fontSize:20
+
   },
   modalContainer: {
     flex: 1,

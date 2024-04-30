@@ -13,6 +13,8 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
     const [mdo, setMDO] = useState('');
     const [costoTotal, setCostoTotal] = useState(0);
 
+    
+
     const calcularCostoTotal = () => {
         // Convertir las cadenas de ancho y alto a valores numéricos
         const anchoNum = parseFloat(ancho.replace(',', '.'));
@@ -181,10 +183,15 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
                                 onValueChange={(itemValue, itemIndex) =>
                                     setColor(itemValue)
                                 }>
-                                <Picker.Item label="Concreto" value="concreto" />
-                                <Picker.Item label="Madera" value="madera" />
-                                <Picker.Item label="Acero" value="acero" />
-                                <Picker.Item label="Ladrillo" value="ladrillo" />
+                                <Picker.Item label="........" value="" />
+                                <Picker.Item label="ANONIZADO CHAMPAGNE" value="Anonizado Champagne" />
+                                <Picker.Item label="ANONIZADO NATURAL MATE" value="Anonizado Natural Mate" />
+                                <Picker.Item label="CHOCOLATE" value="Chocolate" />
+                                <Picker.Item label="ESMALTADO BLANCO O BEIGE" value="Esmaltado Blanco" />
+                                <Picker.Item label="GRIS EUROPA" value="Gris Europa" />
+                                <Picker.Item label="NEGRO" value="Negro" />
+                                <Picker.Item label="SIN ANODIZAR / NORMAL" value="Sin Anodizar/ Normal" />
+                                <Picker.Item label="SUBLIMADO MADERA" value="Sublimado Madero" />
                             </Picker>
                         </View>
                     </View>
