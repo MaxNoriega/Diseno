@@ -34,9 +34,13 @@ export default function InventarioListScreen() {
           <Image source={require('../../icons/filtro.png')} style={styles.filtroIcon} />
         </TouchableOpacity>
       </View>
+<<<<<<< HEAD
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, backgroundColor: '#C6CCDC', marginTop: 20, height: 500 }}>
     
      <View style={styles.containerlistado}>
+=======
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, backgroundColor: '#C6CCDC', marginTop: 20, height: 550 }}>
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
       <FlatList style={styles.listado}
             data={materiales}
             keyExtractor={(item) => item.id}
@@ -53,7 +57,10 @@ export default function InventarioListScreen() {
           />
 
           </View>
+<<<<<<< HEAD
           </View>
+=======
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
       <View style={styles.footer}>
         <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
           <Image source={require('../../icons/add.png')} style={styles.addButtonIcon} />
@@ -121,8 +128,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#C6CCDC',
     flex: 1,
   },
+<<<<<<< HEAD
   
   
+=======
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
   clientItem: {
     fontSize: 22,
     marginTop: 5,

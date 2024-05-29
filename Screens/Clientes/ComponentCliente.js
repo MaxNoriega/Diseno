@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Modal } from 'react-native'
 
@@ -46,6 +47,31 @@ export default function ComponentCliente ({item, setModalVisible, EditarCliente,
           </View>
         </Modal>
       </View>
+=======
+import React from 'react'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+
+export default function ComponentCliente ({item, setModalVisible, EditarCliente}) {
+    const { nomC, id} = item
+  return (
+    <View >
+        <Text>{nomC}</Text>
+
+        <View style={styles.contenedorBotones}>
+            <TouchableOpacity style={[styles.btn, styles.btnEditar]}
+                              onLongPress={()=> {
+                                setModalVisible(true)
+                                EditarCliente(id)
+                              }}
+            >
+                <Text style={styles.btnTexto}>Editar</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[styles.btn, styles.btnEliminar]}>
+                <Text style={styles.btnTexto}>Eliminar</Text>
+            </TouchableOpacity>
+        </View>
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
     </View>
         
   )
@@ -56,9 +82,13 @@ const styles = StyleSheet.create({
     backgroundColor:'#FFF',
     padding:20,
     borderBottomColor:'#94A3B8',
+<<<<<<< HEAD
     borderBottomWidth:1,
     flexDirection: 'row',
     justifyContent:'space-between'
+=======
+    borderBottomWidth:1
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
   },
   label:{
     color:'#374151',
@@ -66,6 +96,7 @@ const styles = StyleSheet.create({
     fontWeight:'700',
     marginBottom:10
   },
+<<<<<<< HEAD
   textoCliente: {
     color: '#000000',
     fontSize: 16,
@@ -77,10 +108,29 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 5,
     marginRight:20
+=======
+  texto:{
+    color:'#6D28D9',
+    fontSize:24,
+    fontWeight:'700'
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
   },
   fecha:{
     color:'#374151'
   },
+<<<<<<< HEAD
+=======
+  contenedorBotones:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    marginTop:20
+  },
+  btn:{
+    paddingVertical:5,
+    paddingHorizontal:20,
+    borderRadius:5
+  },
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
   btnEditar:{
      backgroundColor:'#F59E0B'
   },
@@ -92,6 +142,7 @@ const styles = StyleSheet.create({
     fontWeight:'700',
     fontSize:12,
     color:'#FFF'
+<<<<<<< HEAD
   },
   contenedorBotones: {
     marginTop: 10,
@@ -131,6 +182,9 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
   },
+=======
+  }
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
 
 
 

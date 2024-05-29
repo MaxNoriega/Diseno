@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
+=======
+import React, { useState } from 'react';
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
 import { StyleSheet, Text, View, TextInput, ScrollView, Image, TouchableOpacity, Modal } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,8 +16,12 @@ export default function Cliente({ modalVisible, setModalVisible, clientes, setCl
   const [direC, setDireC] = useState('')
   const [cEX, setCEX] = useState('')
 
+<<<<<<< HEAD
  
   const handleNext = async () => {
+=======
+  const handleNext = () => {
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
     if ([nomC, apellC, telC, direC].includes('')) {
       Alert.alert(
         'Error',
@@ -29,6 +37,7 @@ export default function Cliente({ modalVisible, setModalVisible, clientes, setCl
       direC,
     }
     console.log([...clientes, newClientes])
+<<<<<<< HEAD
     const updatedClientes = ([...clientes, newClientes]);
     try {
       await AsyncStorage.setItem('clientes', JSON.stringify(updatedClientes));
@@ -36,13 +45,21 @@ export default function Cliente({ modalVisible, setModalVisible, clientes, setCl
     } catch (error) {
       console.log('Error saving productos to AsyncStorage', error);
     }
+=======
+    setClientes([...clientes, newClientes]);
+    
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
     setNomC('')
     setApellC('')
     setTelC('')
     setDireC('')
   }
 
+<<<<<<< HEAD
   const handleSave = async () => {
+=======
+  const handleSave = () => {
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
     if ([nomC, apellC, telC, direC].includes('')) {
       Alert.alert(
         'Error',
@@ -58,6 +75,7 @@ export default function Cliente({ modalVisible, setModalVisible, clientes, setCl
       direC,
     }
     console.log([...clientes, newClientes])
+<<<<<<< HEAD
     const updatedClientes = ([...clientes, newClientes]);
     try {
       await AsyncStorage.setItem('clientes', JSON.stringify(updatedClientes));
@@ -75,6 +93,19 @@ export default function Cliente({ modalVisible, setModalVisible, clientes, setCl
     setModalVisible(!modalVisible)
   }
 
+=======
+    setClientes([...clientes, newClientes]);
+    setModalVisible(!modalVisible)
+
+    setNomC('')
+    setApellC('')
+    setTelC('')
+    setDireC('')
+  }
+
+
+
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
   return (
     <Modal
       animationType='slide'
@@ -125,7 +156,10 @@ export default function Cliente({ modalVisible, setModalVisible, clientes, setCl
               placeholder='Teléfono del Cliente'
               placeholderTextColor={'#000000'}
               keyboardType='number-pad'
+<<<<<<< HEAD
               maxLength={10}
+=======
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
               value={telC}
               onChangeText={setTelC}
             />

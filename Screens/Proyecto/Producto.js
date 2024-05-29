@@ -52,6 +52,7 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
         calcularCostoTotal();
     }, [ancho, alto, cristal,mdo]);
 
+<<<<<<< HEAD
     useEffect(() => {
         const loadProductos = async () => {
           try {
@@ -67,6 +68,9 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
         loadProductos();
       }, []);
     const handleNext = async  () => {
+=======
+    const handleNext = () => {
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
         if ([ancho, alto, cristal, color, mdo].includes('')) {
           Alert.alert(
             'Error',
@@ -84,6 +88,7 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
           costoTotal: costoTotal.toString(), // Convertir a cadena para que se muestre correctamente en el Text
         };
         console.log([...productos, newProductos])
+<<<<<<< HEAD
         const updatedProductos = ([...productos, newProductos]);
 
         try {
@@ -92,6 +97,9 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
           } catch (error) {
             console.log('Error saving productos to AsyncStorage', error);
           }
+=======
+        setProductos([...productos, newProductos]);
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
         
         setAncho('');
         setAlto('');
@@ -100,7 +108,11 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
         setMDO('');
     };
 
+<<<<<<< HEAD
     const handleSave = async () => {
+=======
+    const handleSave = () => {
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
         if ([ancho, alto, cristal, color, mdo].includes('')) {
           Alert.alert(
             'Error',
@@ -118,6 +130,7 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
           costoTotal: costoTotal.toString(), // Convertir a cadena para que se muestre correctamente en el Text
         };
         console.log([...productos, newProductos])
+<<<<<<< HEAD
         const updatedProductos = ([...productos, newProductos]);
 
         try {
@@ -135,6 +148,9 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
         
     
 
+=======
+        setProductos([...productos, newProductos]);
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
         setModalVisible(!modalVisible);
 
         setAncho('');
@@ -203,6 +219,7 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
                                 onValueChange={(itemValue, itemIndex) =>
                                     setCristal(itemValue)
                                 }>
+<<<<<<< HEAD
                                 <Picker.Item label="Ninguno" value="Ninguno" />
                                 <Picker.Item label="CRISTAL LAMINADO 3MM + 3MM" value="100" />
                                 <Picker.Item label="CRISTAL CLARO 3MM" value="100" />
@@ -212,6 +229,12 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
                                 <Picker.Item label="CRISTAL CLARO 9.5MM" value="100" />
                                 <Picker.Item label="CRISTAL CLARO 12MM" value="100" />
                                 <Picker.Item label="CRISTAL CLARO 15MM" value="100" />
+=======
+                                <Picker.Item label="Concreto" value="100" />
+                                <Picker.Item label="Madera" value="100" />
+                                <Picker.Item label="Acero" value="100" />
+                                <Picker.Item label="Ladrillo" value="100" />
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
                             </Picker>
                         </View>
                     </View>
@@ -252,7 +275,11 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
                     <View style={styles.campoFin}>
                         <Text style={styles.labelfin}>Costo total</Text>
                         <View style={styles.costoTotal}>
+<<<<<<< HEAD
                                 <Text style={styles.costoTotalTXT}>${isNaN(costoTotal) ? 0 : costoTotal.toFixed(0)}</Text>
+=======
+                                <Text style={styles.costoTotalTXT}>${isNaN(costoTotal) ? 0 : costoTotal}</Text>
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
                         </View>
                     </View>
 
@@ -269,7 +296,10 @@ export default function Product({ modalVisible, setModalVisible, productos, setP
     )
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
 const styles = StyleSheet.create({
 
     contenido: {
@@ -359,7 +389,11 @@ const styles = StyleSheet.create({
     campoFin: {
         marginTop: 10,
         marginHorizontal: 30,
+<<<<<<< HEAD
         
+=======
+        marginBottom: 10,
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
         backgroundColor: '#0000',
         justifyContent: 'center'
     },

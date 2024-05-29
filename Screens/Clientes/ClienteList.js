@@ -1,8 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
 
 import Cliente from './Cliente';
 import ComponentCliente from './ComponentCliente';
@@ -14,6 +20,7 @@ export default function ClientesListScreen() {
   const [clientes, setClientes] = useState([])
   const [cliente, setCliente] = useState({})
   
+<<<<<<< HEAD
   useEffect(() => {
     const loadclientes = async () => {
       try {
@@ -29,11 +36,14 @@ export default function ClientesListScreen() {
     loadclientes();
   }, []);
 
+=======
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
 
   const EditarCliente = id => {
     const EditarCliente = clientes.filter(cliente => cliente.id === id)
     setCliente(EditarCliente[0])
   }
+<<<<<<< HEAD
 
   const EliminarCliente = async (id) => {
     try {
@@ -46,6 +56,8 @@ export default function ClientesListScreen() {
       console.log('Error deleting clientes from AsyncStorage', error);
     }
   };
+=======
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
   //Cambiar Ruta de iconos
   //Logica de Buscar Cliente, Filtros y Agregar Clientes
   return (
@@ -74,7 +86,10 @@ export default function ClientesListScreen() {
                   item={item}
                   setModalVisible={setModalVisible}
                   EditarCliente={EditarCliente}
+<<<<<<< HEAD
                   EliminarCliente={EliminarCliente}
+=======
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
                 />
               )
             }}

@@ -121,8 +121,14 @@ export default function Material ({ modalVisible, setModalVisible, materiales, s
           setTipo(itemValue)
         }>
         <Picker.Item label="Ninguno" value="Niguno" />
+<<<<<<< HEAD
         <Picker.Item label="Cristal" value="Cristal" />
         <Picker.Item label="Herraje" value="Herraje" />
+=======
+        <Picker.Item label="Madera" value="Madera" />
+        <Picker.Item label="Acero" value="Acero" />
+        <Picker.Item label="Ladrillo" value="Ladrillo" />
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
       </Picker>
       </View>
         </View>
@@ -156,7 +162,11 @@ export default function Material ({ modalVisible, setModalVisible, materiales, s
         />
       </View>
 
+<<<<<<< HEAD
        <View style={{alignItems:'flex-end', marginTop:50}}>
+=======
+       <View style={{alignItems:'flex-end', marginTop:150}}>
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
       <TouchableOpacity onPress={handleNext}>
         <Image source={require('../../icons/add.png')} style={styles.addButtonIcon}/>
       </TouchableOpacity>
@@ -300,8 +310,13 @@ const styles = StyleSheet.create({
 
   },
   addButtonIcon: {
+<<<<<<< HEAD
     width: 120,
     height: 120,
+=======
+    width: 90,
+    height: 90,
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
     marginRight:20,
   },
 

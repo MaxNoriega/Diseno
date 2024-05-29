@@ -33,8 +33,11 @@ export default function ProyectoScreen() {
     setCostoTotal(total);
   };
 
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
 
   const productoEditar = id => {
     const productoEditar = productos.filter(producto => producto.id === id)
@@ -85,7 +88,11 @@ export default function ProyectoScreen() {
 
         <View style={styles.ContainerADDbutton}>
           <View style={styles.ContainerCostTOT}>
+<<<<<<< HEAD
             <Text style={styles.costoTotalTXT}>${costoTotal.toFixed(0)}</Text>
+=======
+            <Text style={styles.costoTotalTXT}>${costoTotal}</Text>
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
           </View>
           
           <TouchableOpacity onPress={() => setModalVisible(true)}>
@@ -144,7 +151,11 @@ const styles = StyleSheet.create({
   btnSave: {
     backgroundColor: '#303D65', 
     marginTop: 10, 
+<<<<<<< HEAD
     marginLeft: 20, 
+=======
+    marginLeft: 50, 
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
     width: 100, 
     height: 45
 
@@ -164,7 +175,11 @@ const styles = StyleSheet.create({
   containerID: {
     flexDirection: 'row', 
     justifyContent: 'space-between', 
+<<<<<<< HEAD
     marginTop: 5
+=======
+    marginTop: 20
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
   },
   txtID: {
     color: '#FFF', 
@@ -209,10 +224,18 @@ const styles = StyleSheet.create({
     padding: 10, 
     backgroundColor: '#C6CCDC', 
     marginTop: 20, 
+<<<<<<< HEAD
     height: 270
 
   },
   ContainerCostoTotal: {
+=======
+    height: 300
+
+  },
+  ContainerCostoTotal: {
+    justifyContent: 'space-between'
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
 
   },
   txtCostoTotal:{
@@ -230,6 +253,10 @@ const styles = StyleSheet.create({
   ContainerADDbutton:{
     flexDirection: 'row', 
     justifyContent: 'flex-end', 
+<<<<<<< HEAD
+=======
+    marginBottom: 10
+>>>>>>> 01080581d6ace6368a594017836257b421479d56
   },
   ContainerCostTOT:{
     flexDirection: 'row', 
